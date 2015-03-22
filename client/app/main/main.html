@@ -1,0 +1,50 @@
+<header class="hero-unit" id="banner">
+    <div class="container">
+        <h1>
+            <span ng-if="macData.name">{{macData.name}}</span>
+            <span ng-if="!macData.name">Unbekannt!</span>
+        </h1>
+
+        <p class="lead">
+            Deine Mac Adresse lautet: {{macData.mac}}
+        </p>
+    </div>
+</header>
+
+<div class="container mac-update">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Ändern</h1>
+            Ändere deinen Namen auf <a href="https://status.kreativitaet-trifft-technik.de">Status</a>.
+            Der wird immer dann angezeigt, wenn du mit diesem Gerät im Mainframe WLan bist.
+        </div>
+    </div>
+    <form class="mac-form" ng-submit="saveName()">
+        <div class="form-group">
+            <label for="name">Name/Alias</label>
+            <input type="text" class="form-control" id="name" placeholder="Dein Name" ng-model="form.name" ng-disabled="ajax" required>
+        </div>
+        <div class="form-group">
+            <a class="btn btn-danger" ng-click="deleteName()" ng-disabled="ajax">Eintrag löschen</a>
+            <button class="btn btn-primary pull-right" type="submit" ng-disabled="ajax">Speichern</button>
+        </div>
+        <div class="form-group" ng-if="errorMsg">
+            <div class="alert alert-danger" role="alert">{{errorMsg}}</div>
+        </div>
+        <div class="form-group" ng-show="ajax">
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <p>spaceDevices |</p>
+    </div>
+</footer>
