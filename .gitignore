@@ -6,5 +6,6 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
+server/config/environment/index.js
 userDb.json
 sample_proc_net_arp
