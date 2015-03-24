@@ -4,10 +4,10 @@ var mqtt = require('mqtt');
 var Q = require('q');
 var fs = require('fs');
 
-var config = require('./../../config/environment');
-var arp = require('./../arp');
-var macDb = require('./../macDb');
-var log = require('./../logging');
+var config = require('./../config/environment/index');
+var arp = require('./arp');
+var macDb = require('./macDb');
+var log = require('./logging');
 
 
 function updateInInterval() {

@@ -4,8 +4,8 @@ var fs = require('fs');
 var spawn = require('child_process').spawn;
 var Q = require('q');
 
-var config = require('./../../config/environment');
-var log = require('./../logging');
+var config = require('./../config/environment/index');
+var log = require('./logging');
 
 /**
  *

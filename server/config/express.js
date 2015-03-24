@@ -15,7 +15,7 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
 
-var authByMac = require('../components/auth-by-mac');
+var authByMac = require('../components/authByMac');
 
 module.exports = function(app) {
   var env = app.get('env');
