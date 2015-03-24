@@ -5,9 +5,9 @@ var controller = require('./mac.controller');
 
 var router = express.Router();
 
-router.get('/', controller.getName);
-router.put('/', controller.setName);
-router.delete('/', controller.deleteName);
+router.get('/', controller.getDevice);
+router.put('/', controller.updateDevice);
+router.delete('/', controller.deleteDevice);
 
 
 module.exports = router;

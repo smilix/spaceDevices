@@ -1,25 +1,40 @@
 'use strict';
 
-var userDb = require('./../../components/userDb');
-
+var macDb = require('./../../components/macDb');
+var log = require('./../../components/logging');
 
 // Get list of macs
-exports.getName = function(req, res) {
-  var name = userDb.getName(req.macAuth.mac);
-  res.json({
+exports.getDevice = function (req, res) {
+  var device = macDb.getDevice(req.macAuth.mac);
+  if (!device) {
+    log.debug('No device data found for ', req.macAuth.mac);
+    res.json({
+      mac: req.macAuth.mac,
+      unknown: true
+    });
+    return;
+  }
+  var dataToSend = {
     mac: req.macAuth.mac,
-    name: name
-  });
+    name: device.name,
+    visibility: device.visibility
+  };
+  log.debug('Send to client ', dataToSend)
+  res.json(dataToSend);
 };
 
-exports.setName = function (req, res) {
-  console.log('Set name "', req.body.name, '" for mac ', req.macAuth.mac);
-  userDb.setName(req.macAuth.mac, req.body.name);
+exports.updateDevice = function (req, res) {
+  log.info('Setting new options for mac"', req.macAuth.mac, ':', req.body);
+
+  macDb.setDevice(req.macAuth.mac, {
+    name: req.body.name,
+    visibility: req.body.visibility || 'show'
+  });
   res.json({});
 };
 
-exports.deleteName = function (req, res) {
-  console.log('Delete name for mac ', req.macAuth.mac);
-  userDb.deleteName(req.macAuth.mac);
+exports.deleteDevice = function (req, res) {
+  log.info('Delete name for mac ', req.macAuth.mac);
+  macDb.deleteDevice(req.macAuth.mac);
   res.json({});
 };

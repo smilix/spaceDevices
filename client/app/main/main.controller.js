@@ -4,9 +4,11 @@ angular.module('spaceDevicesApp').controller('MainCtrl', function ($scope, $http
 
   $scope.ajax = true;
   $scope.errorMsg = false;
-  $scope.macData = {};
+  $scope.mac = '';
+  $scope.name = '';
   $scope.form = {
-    name: ''
+    name: '',
+    visibility: 'show'
   };
 
   function handleRequest(promise, errorText) {
@@ -30,13 +32,10 @@ angular.module('spaceDevicesApp').controller('MainCtrl', function ($scope, $http
   }
 
   $scope.saveName = function () {
-    var data = {
-      name: $scope.form.name
-    };
-    handleRequest($http.put('/api/macs', data),
+    handleRequest($http.put('/api/macs', $scope.form),
       'Fehler beim Speichern :(').then(
       function ok() {
-        $scope.macData.name = $scope.form.name;
+        $scope.name = $scope.form.name;
       });
   };
 
@@ -45,7 +44,8 @@ angular.module('spaceDevicesApp').controller('MainCtrl', function ($scope, $http
       'Fehler beim Löschen :(').then(
       function ok() {
         $scope.form.name = '';
-        $scope.macData.name = null;
+        $scope.form.visibility = 'show';
+        $scope.name = '';
       }
     );
   };
@@ -54,8 +54,10 @@ angular.module('spaceDevicesApp').controller('MainCtrl', function ($scope, $http
   $http.get('/api/macs').then(
     function ok(result) {
       $scope.ajax = false;
-      $scope.macData = result.data;
+      $scope.name = result.data.name;
+      $scope.mac = result.data.mac;
       $scope.form.name = result.data.name;
+      $scope.form.visibility = result.data.visibility;
     }, function error(err) {
       console.log(err);
       $scope.ajax = false;

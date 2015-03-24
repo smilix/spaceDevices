@@ -1,0 +1,17 @@
+#!/bin/bash
+
+sleep 1
+
+case $6 in
+  "192.168.2.45" )
+    echo "ab:ab:ab:ab:4e:0b"
+    ;;
+  "192.168.2.247" )
+    echo "ab:ab:ab:ab:fa:31"
+    ;;
+  "127.0.0.1" )
+    echo "ab:ab:ab:ab:4d:ed"
+    ;;
+esac
+
+exit 0

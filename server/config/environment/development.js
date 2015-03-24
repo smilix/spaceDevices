@@ -4,9 +4,11 @@
 // ==================================
 module.exports = {
 
-  arpCache: {
-    device: 'sample_proc_net_arp',
-    lanDevice: 'br0'
+  arp: {
+    device: 'forTests/sample_proc_net_arp',
+    lanDevice: 'br0',
+    arping: 'forTests/simulate_arp_ping',
+    pingCount: 1
   }
 
 };
