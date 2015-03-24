@@ -5,9 +5,9 @@
 module.exports = {
 
   arp: {
-    device: 'forTests/sample_proc_net_arp',
+    device: 'extras/sample_proc_net_arp',
     lanDevice: 'br0',
-    arping: 'forTests/simulate_arp_ping',
+    arping: 'extras/simulate_arp_ping',
     pingCount: 1
   }
 

@@ -1,0 +1,17 @@
+IP address       HW type     Flags       HW address            Mask     Device
+192.168.2.45     0x1         0x2         ab:ab:ab:ab:4e:0b     *        br0
+192.168.2.248    0x1         0x0         ab:ab:ab:ab:a9:8c     *        br0
+192.168.2.238    0x1         0x2         ab:ab:ab:ab:04:9a     *        br0
+192.168.2.229    0x1         0x0         ab:ab:ab:ab:29:b4     *        br0
+192.168.2.247    0x1         0x0         ab:ab:ab:ab:fa:31     *        br0
+192.168.178.23   0x1         0x0         00:00:00:00:00:00     *        eth1
+192.168.2.113    0x1         0x2         ab:ab:ab:ab:aa:80     *        br0
+127.0.0.1    0x1         0x2         64:66:b3:ee:4d:ed     *        br0
+192.168.2.243    0x1         0x2         ab:ab:ab:ab:fa:82     *        br0
+192.168.2.234    0x1         0x0         ab:ab:ab:ab:cd:20     *        br0
+192.168.2.133    0x1         0x0         ab:ab:ab:ab:64:d0     *        br0
+192.168.2.171    0x1         0x0         ab:ab:ab:ab:b7:f4     *        br0
+192.168.2.79     0x1         0x0         ab:ab:ab:ab:c3:0f     *        br0
+192.168.2.125    0x1         0x2         ab:ab:ab:ab:ef:7b     *        br0
+192.168.2.192    0x1         0x2         ab:ab:ab:ab:6b:41     *        br0
+
