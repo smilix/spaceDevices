@@ -1,5 +1,6 @@
 'use strict';
 
+var auth = require('./../../components/authByMac');
 var macDb = require('./../../components/macDb');
 var log = require('./../../components/logging');
 
@@ -19,13 +20,13 @@ exports.getDevice = function (req, res) {
     name: device.name,
     visibility: device.visibility
   };
-  log.debug('Send to client ', dataToSend)
+  log.debug('Send to client ', dataToSend);
   res.json(dataToSend);
 };
 
 exports.updateDevice = function (req, res) {
   log.info('Setting new options for mac"', req.macAuth.mac, ':', req.body);
-
+  auth.checkCurrentCookieAuth(req);
   macDb.setDevice(req.macAuth.mac, {
     name: req.body.name,
     visibility: req.body.visibility || 'show'
@@ -35,6 +36,7 @@ exports.updateDevice = function (req, res) {
 
 exports.deleteDevice = function (req, res) {
   log.info('Delete name for mac ', req.macAuth.mac);
+  auth.checkCurrentCookieAuth(req);
   macDb.deleteDevice(req.macAuth.mac);
   res.json({});
 };

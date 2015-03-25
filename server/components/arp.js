@@ -7,11 +7,8 @@ var Q = require('q');
 var config = require('./../config/environment/index');
 var log = require('./logging');
 
-/**
- *
- * @returns {Array}
- */
-exports.readArpCache = function () {
+
+function readArpCache() {
   var data, cols, i, lines, result = [];
   data = fs.readFileSync(config.arp.device);
   lines = data.toString().split('\n');
@@ -45,8 +42,26 @@ exports.readArpCache = function () {
   }
 
   return result;
+}
+
+
+exports.getMacForIp = function (ip) {
+  var macList = readArpCache();
+  for (var i = 0; i < macList.length; i++) {
+    if (macList[i].ip === ip) {
+      return macList[i].hwAddress;
+    }
+  }
+
+  return null;
 };
 
+
+/**
+ *
+ * @returns {Array}
+ */
+exports.readArpCache = readArpCache;
 
 /**
  *

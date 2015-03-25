@@ -7,19 +7,13 @@ var arp = require('./arp');
 var log = require('./logging');
 
 
-function getMacForIp(ip) {
-  var macList = arp.readArpCache();
-  for (var i = 0; i < macList.length; i++) {
-    if (macList[i].ip === ip) {
-      return macList[i].hwAddress;
-    }
-  }
-
-  return null;
-}
+var COOKIE_NAME = 'macAuth';
 
 function createNewSession(ip) {
-  var mac = getMacForIp(ip);
+  if (!ip) {
+    throw new Error('Invalid ip: ' + ip);
+  }
+  var mac = arp.getMacForIp(ip);
   if (!mac) {
     throw new Error('No mac found for ' + ip);
   }
@@ -29,24 +23,37 @@ function createNewSession(ip) {
   };
 }
 
+
+/**
+ * Checks that the mac in the signed cookie matches the mac associated to the current ip.
+ * Useful for important actions, like data modification.
+ */
+exports.checkCurrentCookieAuth = function (req) {
+  var authData = req.signedCookies[COOKIE_NAME];
+  if (!authData) {
+    throw new Error('No auth from cookie');
+  }
+  var session = createNewSession(req.ip);
+  if (authData.mac !== session.mac) {
+    throw new Error('session mac and mac from ip do NOT match!');
+  }
+};
+
 exports.interceptor = function () {
-
-  var cookieName = 'macAuth';
-
   return function macAuthInterceptor(req, res, next) {
 
     if (!req.signedCookies) {
       throw new Error('macAuthInterceptor must used after express cookie parser and signed cookies must be enabled.');
     }
 
-    var authData = req.signedCookies[cookieName];
+    var authData = req.signedCookies[COOKIE_NAME];
 
     try {
       if (!authData) {
         // create new
         log.trace('Create new session for ', req.ip);
         authData = createNewSession(req.ip);
-        res.cookie(cookieName, authData, {
+        res.cookie(COOKIE_NAME, authData, {
 //        secure: true,
           expires: 0,
           signed: true
