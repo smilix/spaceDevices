@@ -54,7 +54,7 @@ exports.interceptor = function () {
         log.trace('Create new session for ', req.ip);
         authData = createNewSession(req.ip);
         res.cookie(COOKIE_NAME, authData, {
-//        secure: true,
+        secure: config.server.https,
           expires: 0,
           signed: true
         });

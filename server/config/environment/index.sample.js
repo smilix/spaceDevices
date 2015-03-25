@@ -41,17 +41,25 @@ var all = {
 
   macDb: {
     // NOT a json file, this one is include with "require" and must have "exports = ..."
-    masterFile: __dirname + '/path/to/master/db/masterDb.js',
+    masterFile: '/path/to/master/db/masterDb.js',
     // loaded as a JSON file
-    userFile: __dirname + '/path/to/user/db/userDb.json'
+    userFile: '/path/to/user/db/userDb.json'
   },
 
   mqtt: {
     server: 'tls://your_server',
-    ca: __dirname + '/path/to/cert/ca.crt',
+    ca: '/path/to/cert/ca.crt',
     topic: '/test/devices',
     username: 'user',
     password: 'pass'
+  },
+
+  server: {
+    https: true,
+    port: process.env.PORT || 9000,
+    // for https
+    key: '/path/to/key/server.key',
+    cert: '/path/to/cert/server.cert'
   }
 
 

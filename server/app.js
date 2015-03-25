@@ -11,13 +11,22 @@ var express = require('express');
 var config = require('./config/environment');
 // Setup server
 var app = express();
-var server = require('http').createServer(app);
+var server;
+if (config.server.https) {
+  var fs = require('fs');
+  server = require('https').createServer({
+    key: fs.readFileSync(config.server.key),
+    cert: fs.readFileSync(config.server.cert)
+  }, app);
+} else {
+  server = require('http').createServer(app);
+}
 require('./config/express')(app);
 require('./routes')(app);
 
 // Start server
-server.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+server.listen(config.server.port, config.ip, function () {
+  console.log('Express server listening on %d, in %s mode', config.server.port, app.get('env'));
 });
 
 require('./components/deviceUpdater');
