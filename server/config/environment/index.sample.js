@@ -21,22 +21,39 @@ var all = {
   // Server port
   port: process.env.PORT || 9000,
 
-  // Should we populate the DB with sample data?
-  seedDB: false,
+  // info 3, debug 2, trace 1
+  logging: {
+    //
+    level: 2
+  },
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: requiredProcessEnv('SESSION_SECRET')
+    session: ''
   },
 
-  arpCache: {
+  arp: {
     device: '/proc/net/arp',
-    lanDevice: 'eth1'
+    lanDevice: 'eth1',
+    arping: '/usr/sbin/arping',
+    pingCount: 3
   },
 
-  userDeviceData: {
-    jsonDb: 'userDb.json'
+  macDb: {
+    // NOT a json file, this one is include with "require" and must have "exports = ..."
+    masterFile: __dirname + '/path/to/master/db/masterDb.js',
+    // loaded as a JSON file
+    userFile: __dirname + '/path/to/user/db/userDb.json'
+  },
+
+  mqtt: {
+    server: 'tls://your_server',
+    ca: __dirname + '/path/to/cert/ca.crt',
+    topic: '/test/devices',
+    username: 'user',
+    password: 'pass'
   }
+
 
 };
 
@@ -44,4 +61,4 @@ var all = {
 // ==============================================
 module.exports = _.merge(
   all,
-  require('./' + process.env.NODE_ENV + '.js') || {});
+    require('./' + process.env.NODE_ENV + '.js') || {});
