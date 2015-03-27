@@ -26,6 +26,7 @@
         </div>
         <div class="form-group">
             <label>Sichtbarkeit</label>
+            <a class="help-link pull-right" href="/help">Hilfe! Was heißt das?</a>
             <div class="radio">
                 <label>
                     <input type="radio" name="visibility" value="show" ng-model="form.visibility" ng-disabled="ajax">
@@ -64,8 +65,4 @@
 
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p><a href="https://github.com/smilix/spaceDevices">https://github.com/smilix/spaceDevices</a></p>
-    </div>
-</footer>
+<div ng-include="'/app/includes/footer.html'"></div>
