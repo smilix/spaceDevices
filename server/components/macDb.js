@@ -59,6 +59,12 @@ function getMasterData() {
   return cachedMasterDb;
 }
 
+// listen on master file change and reload that file
+fs.watch(config.macDb.masterFile, function () {
+  log.info('masterDb file changed. Clear config.');
+  cachedMasterDb = null;
+});
+
 //
 // PUBLIC
 //
