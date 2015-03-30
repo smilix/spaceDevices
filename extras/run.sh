@@ -2,7 +2,7 @@
 
 #This script ensures that $APP is automatically restarting after an error happens
 
-NODE_APP=app.js
+NODE_APP=spaceDevices/server/app.js
 
 #Handling Errors
 # 0 silent

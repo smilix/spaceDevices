@@ -9,6 +9,10 @@ module.exports = {
     lanDevice: 'br0',
     arping: 'extras/simulate_arp_ping',
     pingCount: 1
+  },
+
+  mqtt: {
+    topic: '/test/devices'
   }
 
 };
