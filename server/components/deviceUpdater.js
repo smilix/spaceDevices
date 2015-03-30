@@ -57,7 +57,7 @@ function updateDevicesOverMqtt() {
       client.publish(config.mqtt.topic, asString, {}, function () {
         client.end();
       });
-      log.info('mqtt update send. Unknown mac ids: ', devicesCount.meta.unknownMacIds);
+      log.info('mqtt update send. Unknown mac ids: ' + JSON.stringify(devicesCount.meta.unknownMacIds));
     },
     function error(err) {
       console.error(err);
