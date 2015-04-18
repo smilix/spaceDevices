@@ -5,6 +5,7 @@
 */
 
 var fs = require('fs');
+var requireNew = require('require-new');
 var _ = require('lodash');
 
 var config = require('./../config/environment/index');
@@ -45,7 +46,7 @@ function saveUserData() {
 function getMasterData() {
   if (!cachedMasterDb) {
     log.debug('Loading masterDb');
-    var master = require(config.macDb.masterFile);
+    var master = requireNew(config.macDb.masterFile);
     cachedMasterDb = {};
     // convert into the same format as userDb
     master.ignoredDevices.forEach(function (ignoredMac) {
