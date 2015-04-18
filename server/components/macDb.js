@@ -61,10 +61,10 @@ function getMasterData() {
 }
 
 // listen on master file change and reload that file
-fs.watch(config.macDb.masterFile, function () {
+fs.watch(config.macDb.masterFile, _.debounce(function () {
   log.info('masterDb file changed. Clear config.');
   cachedMasterDb = null;
-});
+}, 1000));
 
 //
 // PUBLIC
