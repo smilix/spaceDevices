@@ -30,7 +30,12 @@ function saveJsonFile(file, data) {
 function getUserData() {
   if (!cachedUserDb) {
     log.debug('Loading userDb');
-    cachedUserDb = loadJsonFile(config.macDb.userFile);
+    var tmpUserDb = loadJsonFile(config.macDb.userFile);
+    // convert all macs to lower case
+    cachedUserDb = {};
+    _.forEach(tmpUserDb, function (n, key) {
+      cachedUserDb[key.toLowerCase()] = tmpUserDb[key];
+    });
   }
   return cachedUserDb;
 }
