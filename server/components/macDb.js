@@ -24,7 +24,7 @@ function loadJsonFile(file) {
 }
 
 function saveJsonFile(file, data) {
-  fs.writeFileSync(file, JSON.stringify(data));
+  fs.writeFileSync(file, JSON.stringify(data, null, ' '));
 }
 
 function getUserData() {
