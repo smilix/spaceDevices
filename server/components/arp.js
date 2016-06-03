@@ -8,7 +8,20 @@ var config = require('./../config/environment/index');
 var log = require('./logging');
 
 
-function readArpCache() {
+
+// https://en.wikipedia.org/wiki/MAC_address
+// expects the mac in the format e.g. "20:c9:d0:7a:fa:31"
+function isLocallyAdministered(mac) {
+  var firstByte = mac.substr(0, 2);
+  var decimal = parseInt(firstByte, 16);
+
+  // 00000010
+  var mask = 1 << 1; // jshint ignore:line
+  return (decimal & mask) === mask; // jshint ignore:line
+}
+
+
+function readArpCache(ignoreLocallyAdministered) {
   var data, cols, i, lines, result = [];
   data = fs.readFileSync(config.arp.device);
   lines = data.toString().split('\n');
@@ -38,11 +51,16 @@ function readArpCache() {
       continue;
     }
 
+    if (ignoreLocallyAdministered && isLocallyAdministered(entry.hwAddress)) {
+      continue;
+    }
+
     result.push(entry);
   }
 
   return result;
 }
+
 
 
 exports.getMacForIp = function (ip) {

@@ -24,7 +24,7 @@ function updateDevicesOverMqtt() {
 
   var arpingPromises = [];
 
-  arp.readArpCache().forEach(function (cacheEntry) {
+  arp.readArpCache(true).forEach(function (cacheEntry) {
     log.trace('Cache entry:', cacheEntry);
 
     arpingPromises.push(arp.arping(cacheEntry.ip));
