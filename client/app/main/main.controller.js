@@ -56,6 +56,7 @@ angular.module('spaceDevicesApp').controller('MainCtrl', function ($scope, $http
       $scope.ajax = false;
       $scope.name = result.data.name;
       $scope.mac = result.data.mac;
+      $scope.isLocallyAdministered = result.data.isLocallyAdministered;
       $scope.form.name = result.data.name;
       $scope.form.visibility = result.data.visibility;
     }, function error(err) {

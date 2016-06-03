@@ -11,12 +11,14 @@ exports.getDevice = function (req, res) {
     log.debug('No device data found for ', req.macAuth.mac);
     res.json({
       mac: req.macAuth.mac,
+      isLocallyAdministered: req.macAuth.isLocallyAdministered,
       unknown: true
     });
     return;
   }
   var dataToSend = {
     mac: req.macAuth.mac,
+    isLocallyAdministered: req.macAuth.isLocallyAdministered,
     name: device.name,
     visibility: device.visibility
   };

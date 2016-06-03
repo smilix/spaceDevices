@@ -19,7 +19,8 @@ function createNewSession(ip) {
   }
 
   return {
-    mac: mac
+    mac: mac,
+    isLocallyAdministered: arp.isLocallyAdministered(mac)
   };
 }
 

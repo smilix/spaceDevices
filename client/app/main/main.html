@@ -11,7 +11,15 @@
     </div>
 </header>
 
-<div class="container mac-update">
+<div class="container locally-administered" ng-if="isLocallyAdministered">
+
+    <div class="alert alert-warning" role="alert">
+        Deine Mac Adresse wird zufällig generiert, daher kannst du dafür keinen Namen eingeben. Bei Windows 10 kann man das angeblich ändern.
+    </div>
+
+</div>
+
+<div class="container mac-update" ng-if="!isLocallyAdministered">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Ändern</h1>

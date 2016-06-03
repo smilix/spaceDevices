@@ -81,6 +81,9 @@ exports.getMacForIp = function (ip) {
  */
 exports.readArpCache = readArpCache;
 
+
+exports.isLocallyAdministered = isLocallyAdministered;
+
 /**
  *
  * @param ip

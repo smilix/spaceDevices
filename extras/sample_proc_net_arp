@@ -7,6 +7,7 @@ IP address       HW type     Flags       HW address            Mask     Device
 192.168.178.23   0x1         0x0         00:00:00:00:00:00     *        eth1
 192.168.2.113    0x1         0x2         ab:ab:ab:ab:aa:80     *        br0
 127.0.0.1    0x1         0x2         64:66:b3:ee:4d:ed     *        br0
+::1     0x1         0x2         62:66:b3:ee:4d:ed     *        br0
 192.168.2.243    0x1         0x2         ab:ab:ab:ab:fa:82     *        br0
 192.168.2.234    0x1         0x0         ab:ab:ab:ab:cd:20     *        br0
 192.168.2.133    0x1         0x0         ab:ab:ab:ab:64:d0     *        br0
