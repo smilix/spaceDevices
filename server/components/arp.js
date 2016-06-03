@@ -52,6 +52,7 @@ function readArpCache(ignoreLocallyAdministered) {
     }
 
     if (ignoreLocallyAdministered && isLocallyAdministered(entry.hwAddress)) {
+      log.trace('ignoring mac', entry.hwAddress);
       continue;
     }
 
