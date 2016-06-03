@@ -24,3 +24,7 @@ To run this as non root, use this to allow arping usage:
 
     setcap cap_net_raw=eip /usr/sbin/arping
 
+
+Change the timeout of the arp cache:
+
+    http://askubuntu.com/a/516574
