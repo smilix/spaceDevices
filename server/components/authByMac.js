@@ -13,6 +13,11 @@ function createNewSession(ip) {
   if (!ip) {
     throw new Error('Invalid ip: ' + ip);
   }
+  // translate ipv6 addresses in the form "::ffff:192.168.2.167" into an ip v4 address
+  var prefix = '::ffff:';
+  if (ip.indexOf(prefix) === 0) {
+    ip = ip.substring(prefix.length);
+  }
   var mac = arp.getMacForIp(ip);
   if (!mac) {
     throw new Error('No mac found for ' + ip);
