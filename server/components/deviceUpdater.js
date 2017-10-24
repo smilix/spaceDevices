@@ -1,14 +1,11 @@
 'use strict';
 
-var mqtt = require('mqtt');
 var Q = require('q');
-var fs = require('fs');
 
-var config = require('./../config/environment/index');
 var arp = require('./arp');
 var macDb = require('./macDb');
 var log = require('./logging');
-
+var mqttSender = require('./mqttSender');
 
 function updateInInterval() {
   setTimeout(function () {
@@ -41,23 +38,9 @@ function updateDevicesOverMqtt() {
       var devicesMaps = macDb.getAllDevices();
 
       var devicesCount = countOnlineSpaceDevices(responses, devicesMaps);
+      log.info('Sending mqtt update. Unknown mac ids: ' + JSON.stringify(devicesCount.meta.unknownMacIds));
 
-      // send per mqtt
-      var client = mqtt.connect(config.mqtt.server, {
-        ca: fs.readFileSync(config.mqtt.ca),
-        username: config.mqtt.username,
-        password: config.mqtt.password
-      });
-      client.on('error', function (error) {
-        console.error('Error sending presence to mqtt server:', error);
-      });
-
-      var asString = JSON.stringify(devicesCount.result);
-      log.debug('sending ' + asString);
-      client.publish(config.mqtt.topic, asString, {}, function () {
-        client.end();
-      });
-      log.info('mqtt update send. Unknown mac ids: ' + JSON.stringify(devicesCount.meta.unknownMacIds));
+      mqttSender.sendDevices(devicesCount.result);
     },
     function error(err) {
       console.error(err);
