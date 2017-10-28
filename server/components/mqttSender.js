@@ -1,6 +1,8 @@
 'use strict';
 
 const MAX_NOT_SEND_ERRORS = 10;
+// this results in "no one visible" which is not correct, the best we can do here
+const EMPTY_DEVICES = '{"deviceCount":0,"unknownDevicesCount":0,"peopleCount":0,"people":[]}';
 
 var fs = require('fs');
 var Q = require('q');
@@ -23,7 +25,7 @@ function connect() {
     // if the client disconnects, we reset the topic
     will: {
       topic: config.mqtt.topic,
-      payload: '',
+      payload: EMPTY_DEVICES,
       retain: true
     }
   };
